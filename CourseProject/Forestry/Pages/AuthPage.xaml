@@ -1,0 +1,25 @@
+﻿<Page x:Class="Forestry.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Forestry.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="AuthPage">
+
+    <StackPanel Orientation="Vertical">
+        <Label Content="Авторизация" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Логин: " Margin="0 0 5.6 0"/>
+            <TextBox x:Name="LoginTextBox" Width="150"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Пароль:"/>
+            <PasswordBox x:Name="PasswordBox" Width="150" Background="#98FB98" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <Button x:Name="LoginButton" Content="Войти" Width="218"/>
+    </StackPanel>
+</Page>

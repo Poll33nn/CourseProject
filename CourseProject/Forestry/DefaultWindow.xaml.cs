@@ -8,17 +8,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Forestry.Pages;
 
 namespace Forestry
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DefaultWindow : Window
     {
-        public MainWindow()
+        public DefaultWindow()
         {
             InitializeComponent();
+            App.CurrentFrame = DefaultFrame;
+            DefaultFrame.Navigate(new MainPage());
         }
     }
 }
