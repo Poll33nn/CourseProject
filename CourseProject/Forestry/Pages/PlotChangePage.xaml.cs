@@ -16,26 +16,18 @@ using System.Windows.Shapes;
 namespace Forestry.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PlotInformationPage.xaml
+    /// Логика взаимодействия для PlotChangePage.xaml
     /// </summary>
-    public partial class PlotInformationPage : Page
+    public partial class PlotChangePage : Page
     {
-        public PlotInformationPage(string Name, string Otv, string Address)
+        public PlotChangePage()
         {
             InitializeComponent();
-            NumberLabel.Content = "Лесной участок № " + Name;
-            OtvLabel.Content = "Ответственный: " + Otv;
-            AddressLabel.Content = "Квартал: " +  Address;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentFrame.GoBack();
-        }
-
-        private void CreateEventButton_Click(object sender, RoutedEventArgs e)
-        {
-            App.CurrentFrame.Navigate(new CreateEventPage(NumberLabel.Content));
         }
     }
 }

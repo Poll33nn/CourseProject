@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -77,7 +78,7 @@ namespace Forestry.Pages
             var button = sender as Button;
             var plot = button?.Tag as ForestPlot;
             if (plot != null)
-                MessageBox.Show($"Редактирование: {plot.Number}");
+                App.CurrentFrame.Navigate(new PlotChangePage());
         }
 
         private void OnDeleteClick(object sender, RoutedEventArgs e)
@@ -93,6 +94,10 @@ namespace Forestry.Pages
                 ForestPlotsList.ItemsSource = null;
                 ForestPlotsList.ItemsSource = _forestPlots;
             }
+        }   
+        private void CreatePlotButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.CurrentFrame.Navigate(new CreatePlotPage());
         }
     }
 }

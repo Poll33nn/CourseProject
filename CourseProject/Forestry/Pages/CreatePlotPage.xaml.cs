@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace Forestry.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PlotInformationPage.xaml
+    /// Логика взаимодействия для CreatePlotPage.xaml
     /// </summary>
-    public partial class PlotInformationPage : Page
+    public partial class CreatePlotPage : Page
     {
-        public PlotInformationPage(string Name, string Otv, string Address)
+        public CreatePlotPage()
         {
             InitializeComponent();
-            NumberLabel.Content = "Лесной участок № " + Name;
-            OtvLabel.Content = "Ответственный: " + Otv;
-            AddressLabel.Content = "Квартал: " +  Address;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -33,9 +30,9 @@ namespace Forestry.Pages
             App.CurrentFrame.GoBack();
         }
 
-        private void CreateEventButton_Click(object sender, RoutedEventArgs e)
+        private void AddTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            App.CurrentFrame.Navigate(new CreateEventPage(NumberLabel.Content));
+            TreesNumberListBox.Items.Add("Ольха - 150");
         }
     }
 }
