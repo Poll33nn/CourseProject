@@ -69,7 +69,7 @@ namespace Forestry.Pages
             var button = sender as Button;
             var plot = button?.Tag as ForestPlot;
             if (plot != null)
-                MessageBox.Show($"Информация о {plot.Number}");
+                App.CurrentFrame.Navigate(new PlotInformationPage(plot.Number, plot.Responsible, plot.Address));
         }
 
         private void OnEditClick(object sender, RoutedEventArgs e)
