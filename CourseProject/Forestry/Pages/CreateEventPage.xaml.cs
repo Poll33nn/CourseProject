@@ -44,5 +44,10 @@ namespace Forestry.Pages
                 PlantingPanel.Visibility = Visibility.Visible;
             }
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.CurrentFrame.GoBack(); 
+        }
     }
 }

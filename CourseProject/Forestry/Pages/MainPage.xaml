@@ -36,9 +36,9 @@
                    x:Name="UserPopUp">
                 <Border Background="#F5F5F5" BorderBrush="Black" BorderThickness="1" CornerRadius="2">
                     <StackPanel>
-                        <Button Content="Профиль" Width="120"/>
-                        <Button Content="Настройки" Width="120"/>
-                        <Separator Margin="0,4"/>
+                        <Button x:Name="ReportButtom" Content="Отчеты" Width="120" Visibility="Collapsed"/>
+                        <Button x:Name="UserButton" Content="Пользователи" Width="120" Visibility="Collapsed"/>
+                        <Separator Margin="0 5"/>
                         <Button Content="Выйти" Width="120" Background="#F44336" Foreground="White"/>
                     </StackPanel>
                 </Border>

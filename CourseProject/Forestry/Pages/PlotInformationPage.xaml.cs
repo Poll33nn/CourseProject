@@ -38,7 +38,7 @@ namespace Forestry.Pages
                 new Tree { Name = "Ольха", Amount = 150 },
                 new Tree { Name = "Ольха", Amount = 150 }
             };
-            TreesListBox.ItemsSource = trees;
+            TreesDataGrid.ItemsSource = trees;
         }
 
 
