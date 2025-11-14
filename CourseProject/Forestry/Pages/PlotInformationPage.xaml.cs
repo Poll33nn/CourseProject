@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +21,26 @@ namespace Forestry.Pages
     /// </summary>
     public partial class PlotInformationPage : Page
     {
+        public class Tree
+        {
+            public string Name { get; set; }
+            public int Amount { get; set; }
+        }
         public PlotInformationPage(string Name, string Otv, string Address)
         {
             InitializeComponent();
             NumberLabel.Content = "Лесной участок № " + Name;
             OtvLabel.Content = "Ответственный: " + Otv;
-            AddressLabel.Content = "Квартал: " +  Address;
+            AddressLabel.Content = "Квартал: " + Address;
+
+            var trees = new ObservableCollection<Tree>
+            {
+                new Tree { Name = "Ольха", Amount = 150 },
+                new Tree { Name = "Ольха", Amount = 150 }
+            };
+            TreesListBox.ItemsSource = trees;
         }
+
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
