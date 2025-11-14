@@ -8,7 +8,7 @@ namespace ServiceLayer.DTO_s
 {
     public class UserDto
     {
-        public string FullName {  get; set; }
-        public string Role {  get; set; }
+        public string FullName { get; set; } = null!;
+        public string RoleName { get; set; } = null!;
     }
 }

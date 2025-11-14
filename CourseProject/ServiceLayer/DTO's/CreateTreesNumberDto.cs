@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.DTO_s
 {
-    public class LoginDto
+    public class CreateTreesNumberDto
     {
-        public string Login { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
+        public int TreeTypeId { get; set; }
+        public int Amount { get; set; }
     }
 }

@@ -8,10 +8,11 @@ namespace ServiceLayer.DTO_s
 {
     public class ForestPlotDetail
     {
-        public int Id { get; set; }
+        public int PlotId { get; set; }
         public string Responsible { get; set; }
-        public int Compartment { get; set; }
-        public int Subcompartment { get; set; }
+        public string Address { get; set; }
+        List<TreesNumberDto> TreesComposition{ get; set; } = new();
+        List<>
 
     }
 }
