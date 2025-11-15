@@ -16,7 +16,15 @@ namespace ServiceLayer.Service
 
         public async Task<UserDto> LoginUser(LoginDto loginDto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == loginDto.Login && u.PasswordHash == loginDto.PasswordHash);
+            var user = await _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(
+                    u => u.Login == loginDto.Login && 
+                    u.PasswordHash == loginDto.PasswordHash);
+            
+            if (user == null)
+                return null;
+
             var userDto = new UserDto()
             {
                 FullName = user.LastName + " " + user.Name + " " + user.Patronymic,

@@ -17,20 +17,83 @@ namespace ServiceLayer.Service
 
         public async Task<List<ForestPlotDto>> GetForestPlotsAsync()
         {
-            var forestPlots = await _context.ForestPlots.ToListAsync<ForestPlotDto>();
-            var forestPlotsDto = new ForestPlotDto()
+            var forestPlots = await _context.ForestPlots
+                .Include(fp => fp.User) 
+                .Include(fp => fp.TreesNumbers) 
+                .ThenInclude(tn => tn.TreeType) 
+                .ToListAsync();
+
+            if (forestPlots == null)
+                return null;
+
+            return forestPlots.Select(forestPlot => new ForestPlotDto
             {
-               
-            };
-            return forestPlotsDto;
+                PlotId = forestPlot.PlotId,
+                Responsible = $"{forestPlot.User.LastName} {forestPlot.User.Name} {forestPlot.User.Patronymic}".Trim(),
+                Compartment = forestPlot.Compartment,
+                Subcompartment = forestPlot.Subcompartment,
+                TreesComposition = forestPlot.TreesNumbers.Select( treesNumber => new TreesNumberDto 
+                { 
+                    TreeType = treesNumber.TreeType.Name,
+                    Amount = treesNumber.Amount,
+                }).ToList()
+            }).ToList();      
         }
 
-        public async Task CreateForestPlotAsync(CreateForestPlotDto createPlotDto)
+        public async Task<bool> CreateForestPlotAsync(CreateForestPlotDto createPlotDto)
         {
-            var forestPlot = new CreateForestPlotDto()
+            var forestPlot = new ForestPlot
             {
-               
+                PlotId = createPlotDto.PlotId,
+                UserId = createPlotDto.UserId,
+                Compartment = Convert.ToByte(createPlotDto.Compartment),
+                Subcompartment = Convert.ToByte(createPlotDto.Subcompartment),
+                TreesNumbers = createPlotDto.TreeComposition.Select(t => new TreesNumber
+                    {
+                        TreeTypeId = t.TreeTypeId,
+                        Amount = t.Amount,
+                    }).ToList()
             };
+
+            if (forestPlot == null)
+                return false;
+
+            _context.ForestPlots.Add(forestPlot);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateForestPlotAsync(UpdateForestPlotDto updatePlotDto)
+        {
+            var existingForestPlot = await _context.ForestPlots
+                .FirstOrDefaultAsync(fp => fp.PlotId == updatePlotDto.PlotId);
+
+            if (existingForestPlot == null)
+                return false;
+            
+            existingForestPlot.PlotId = updatePlotDto.PlotId;
+            existingForestPlot.UserId = updatePlotDto.UserId;
+            existingForestPlot.Compartment = Convert.ToByte(updatePlotDto.Compartment);
+            existingForestPlot.Subcompartment = Convert.ToByte(updatePlotDto.Subcompartment);
+            
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> DeleteForestPlot(int plotId)
+        {
+            var forestPlot = await _context.ForestPlots
+                .Include(fp =>  fp.TreesNumbers)
+                .Include(fp => fp.SilvicultureEvents)
+                .FirstOrDefaultAsync(fp => fp.PlotId == plotId);
+
+            if (forestPlot == null)
+                return false;
+
+            _context.SilvicultureEvents.RemoveRange(forestPlot.SilvicultureEvents);
+            _context.TreesNumbers.RemoveRange(forestPlot.TreesNumbers);
+            _context.ForestPlots.Remove(forestPlot);
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

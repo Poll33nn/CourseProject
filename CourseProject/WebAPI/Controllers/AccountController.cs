@@ -20,14 +20,10 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            if (string.IsNullOrEmpty(loginDto.Login))
-                return BadRequest("Логин не указан");
-            if (string.IsNullOrEmpty(loginDto.PasswordHash))
-                return BadRequest("Пароль не указан");
-
             var user = await _accountService.LoginUser(loginDto);
-            if (user == null)
-                return BadRequest("Логин или пароль не верный");
+            if (user == null) 
+                return NotFound();
+
             return Ok(_tokenService.GenerateToken(user));
         }
     }

@@ -51,6 +51,8 @@ public partial class ForestryContext : DbContext
 
             entity.ToTable("ForestPlot");
 
+            entity.Property(e => e.PlotId).ValueGeneratedNever();
+
             entity.HasOne(d => d.User).WithMany(p => p.ForestPlots)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

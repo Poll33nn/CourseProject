@@ -8,6 +8,7 @@ namespace ServiceLayer.DTO_s
 {
     public class CreateForestPlotDto
     {
+        public int PlotId { get; set; }
         public int UserId { get; set; }
         public int Compartment { get; set; }
         public int Subcompartment { get; set; }
