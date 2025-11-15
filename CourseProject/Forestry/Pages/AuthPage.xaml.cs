@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +22,27 @@ namespace Forestry.Pages
     /// </summary>
     public partial class AuthPage : Page
     {
+        private readonly ApiService _apiService = new(new());
         public AuthPage()
         {
             InitializeComponent();
+        }
+
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(LoginTextBox.Text));
+                LoginTextBox.Text = Convert.ToBase64String(hash);
+
+                await _apiService.Login(LoginTextBox.Text, PasswordBox.Password);
+
+                App.CurrentFrame.Navigate(new MainPage());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

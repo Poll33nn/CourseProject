@@ -11,8 +11,6 @@ namespace ServiceLayer.DTO_s
         public int PlotId { get; set; }
         public string Responsible { get; set; }
         public string Address { get; set; }
-        List<TreesNumberDto> TreesComposition{ get; set; } = new();
-        List<>
-
+        List<TreesNumberDto> TreesComposition { get; set; } = new();
     }
 }

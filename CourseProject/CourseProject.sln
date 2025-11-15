@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forestry", "Forestry\Forestry.csproj", "{70B0CF93-6FC4-427D-97C3-E3F936758772}"
+	ProjectSection(ProjectDependencies) = postProject
+		{652BC022-C31A-4534-8B39-1BA812E13E5B} = {652BC022-C31A-4534-8B39-1BA812E13E5B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{39FD72E3-99E0-4058-899E-3A3F7604E02E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -33,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0298C6B6-C423-40C5-9957-2824612DCFA3}
 	EndGlobalSection
 EndGlobal

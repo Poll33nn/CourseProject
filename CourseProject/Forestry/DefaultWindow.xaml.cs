@@ -21,7 +21,7 @@ namespace Forestry
         {
             InitializeComponent();
             App.CurrentFrame = DefaultFrame;
-            DefaultFrame.Navigate(new MainPage());
+            DefaultFrame.Navigate(new AuthPage());
         }
     }
 }

@@ -20,6 +20,6 @@
             <Label Content="Пароль:"/>
             <PasswordBox x:Name="PasswordBox" Width="150" Background="#98FB98" VerticalContentAlignment="Center"/>
         </StackPanel>
-        <Button x:Name="LoginButton" Content="Войти" Width="218"/>
+        <Button x:Name="LoginButton" Content="Войти" Width="218" Click="LoginButton_Click"/>
     </StackPanel>
 </Page>
