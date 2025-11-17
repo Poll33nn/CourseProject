@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Data;
+using ServiceLayer.DTO_s;
 using ServiceLayer.Models;
+using ServiceLayer.Service;
 
 namespace WebAPI.Controllers
 {
@@ -14,33 +16,36 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ForestPlotsController : ControllerBase
     {
-        private readonly ForestryContext _context;
-
-        public ForestPlotsController(ForestryContext context)
+        private readonly ForestPlotService _service;
+        public ForestPlotsController(ForestPlotService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/ForestPlots
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ForestPlot>>> GetForestPlots()
+        public async Task<ActionResult<IEnumerable<ForestPlotDto>>> GetForestPlots()
         {
-            return await _context.ForestPlots.ToListAsync();
-        }
-
-        // GET: api/ForestPlots/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ForestPlot>> GetForestPlot(int id)
-        {
-            var forestPlot = await _context.ForestPlots.FindAsync(id);
-
-            if (forestPlot == null)
-            {
+            var forestPlots = await _service.GetForestPlotsAsync();
+            if (forestPlots == null) 
                 return NotFound();
-            }
 
-            return forestPlot;
+            return forestPlots;
         }
+
+        //// GET: api/ForestPlots/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<ForestPlot>> GetForestPlot(int id)
+        //{
+        //    var forestPlot = await _context.ForestPlots.FindAsync(id);
+
+        //    if (forestPlot == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return forestPlot;
+        //}
 
         // PUT: api/ForestPlots/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
