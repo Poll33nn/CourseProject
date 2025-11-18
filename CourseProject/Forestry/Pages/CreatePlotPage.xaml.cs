@@ -23,6 +23,7 @@ namespace Forestry.Pages
         public CreatePlotPage()
         {
             InitializeComponent();
+            //контроллер создания участка + добавление состава участка
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

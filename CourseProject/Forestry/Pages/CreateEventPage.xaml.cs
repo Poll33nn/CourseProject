@@ -23,6 +23,8 @@ namespace Forestry.Pages
         public CreateEventPage(object label)
         {
             InitializeComponent();
+            //контроллер получения списка ответственных
+            //контроллер добавления мероприятия
             PlotIdLabel.Content = label;
             EventTypeComboBox.Items.Add("1");
             EventTypeComboBox.Items.Add("2");

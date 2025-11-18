@@ -29,7 +29,7 @@
             <TextBox x:Name="SubcompartmentTextBox" Width="75"/>
         </StackPanel>
 
-        <Button x:Name="ChangePlotButton" Content="Изменить" Width="100" HorizontalAlignment="Left" Margin="10" DockPanel.Dock="Top"/>
+        <Button x:Name="ChangePlotButton" Content="Изменить" Width="100" HorizontalAlignment="Left" Margin="10" DockPanel.Dock="Top" Click="ChangePlotButton_Click"/>
         <Button x:Name="BackButton" Content="Назад" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BackButton_Click"/>
     </DockPanel>
 </Page>

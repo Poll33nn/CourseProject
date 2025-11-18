@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Azure;
 
 namespace Forestry.Pages
 {
@@ -23,12 +24,10 @@ namespace Forestry.Pages
     /// </summary>
     public partial class AuthPage : Page
     {
-        private HttpClient _httpClient = new();
-        private readonly ApiService _apiService;
+        private readonly ApiService _apiService = new();
         public AuthPage()
         {
             InitializeComponent();
-            _apiService = new(_httpClient);
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -41,9 +40,13 @@ namespace Forestry.Pages
                     MessageBox.Show("Пароль не заполнен!");
 
                 var result = await _apiService.Login(LoginTextBox.Text.Trim(), PasswordBox.Password.Trim());
-                
+
                 if (result == HttpStatusCode.NotFound)
-                    MessageBox.Show("Пользователь не найден");
+                    MessageBox.Show("Пользователь не найден"
+                        , "Ошибка"
+                        , MessageBoxButton.OK
+                        , MessageBoxImage.Warning);
+
                 if (result == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Авторизация прошла успешно!"
@@ -52,8 +55,7 @@ namespace Forestry.Pages
                         , MessageBoxImage.Information);
 
                     App.CurrentFrame.Navigate(new MainPage());
-                }
-                
+                }                 
             }
             catch (Exception ex)
             {

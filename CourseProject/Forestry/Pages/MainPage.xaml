@@ -22,7 +22,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label Content="Фамилия Имя Отчество" VerticalAlignment="Center"/>
+            <Label Content="{Binding Source={x:Static Application.Current}, Path= UserFullName}" VerticalAlignment="Center"/>
             <ToggleButton x:Name="UserProfilButton" Background="#2E8B57" Margin="5 0 17 0" Height="50" Width="50">
                 <Image Source="/Icons/person_icon.png"/>
             </ToggleButton>
@@ -62,9 +62,16 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="15 5 0 5">
-                                        <TextBlock Text="{Binding Number, StringFormat='Лесной участок № {0}'}" FontWeight="Bold" FontSize="16"/>
+                                        <TextBlock Text="{Binding PlotId, StringFormat='Лесной участок № {0}'}" FontWeight="Bold" FontSize="16"/>
                                         <TextBlock Text="{Binding Responsible, StringFormat='Ответсвтенный: {0}'}" Margin="20 0 0 5" FontSize="14"/>
-                                        <TextBlock Text="{Binding Address, StringFormat='Квартал: {0}'}" Margin="20 0 0 5" FontSize="14"/>
+                                        <TextBlock Margin="20 0 0 5" FontSize="14">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="Коношский район, п. Коноша Квартал: {0} Выдел: {1}">
+                                                    <Binding Path="Compartment" />
+                                                    <Binding Path="Subcompartment" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="8">

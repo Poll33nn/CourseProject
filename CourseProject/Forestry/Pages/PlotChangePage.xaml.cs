@@ -20,9 +20,18 @@ namespace Forestry.Pages
     /// </summary>
     public partial class PlotChangePage : Page
     {
-        public PlotChangePage()
+        public PlotChangePage(int PlotId, string Responsible, int Compartment, int Subcompartment)
         {
             InitializeComponent();
+            PlotNumberTextBox.Text = PlotId.ToString();
+            UserComboBox.SelectedItem = Responsible;
+            CompartmentTextBox.Text = Compartment.ToString();
+            SubcompartmentTextBox.Text = Subcompartment.ToString();
+        }
+
+        private void ChangePlotButton_Click(object sender, RoutedEventArgs e)
+        {
+            //контроллер изменения
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

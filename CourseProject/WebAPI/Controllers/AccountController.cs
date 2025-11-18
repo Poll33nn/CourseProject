@@ -22,9 +22,16 @@ namespace WebAPI.Controllers
         {
             var user = await _accountService.LoginUser(loginDto);
             if (user == null) 
-                return NotFound();
+                return NotFound("Пользователь не найден!");
 
-            return Ok(_tokenService.GenerateToken(user));
+            var userInfo = new LoginResponseDto
+            {
+                UserFullName = user.FullName,
+                UserRole = user.RoleName,
+                Token = _tokenService.GenerateToken(user)
+            };
+
+            return Ok(userInfo);
         }
     }
 }

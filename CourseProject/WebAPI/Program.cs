@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ForestryContext>(options =>
 );
 
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<ForestPlotService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

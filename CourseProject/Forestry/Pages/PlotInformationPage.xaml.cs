@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceLayer.DTO_s;
 
 namespace Forestry.Pages
 {
@@ -21,35 +22,22 @@ namespace Forestry.Pages
     /// </summary>
     public partial class PlotInformationPage : Page
     {
-        public class Tree
-        {
-            public string Name { get; set; }
-            public int Amount { get; set; }
-        }
-        public PlotInformationPage(string Name, string Otv, string Address)
+        public PlotInformationPage(int PlotId, string Responsible, int Compartment, int Subcompartment, List<TreesNumberDto> TreesComposition)
         {
             InitializeComponent();
-            NumberLabel.Content = "Лесной участок № " + Name;
-            OtvLabel.Content = "Ответственный: " + Otv;
-            AddressLabel.Content = "Квартал: " + Address;
-
-            var trees = new ObservableCollection<Tree>
-            {
-                new Tree { Name = "Ольха", Amount = 150 },
-                new Tree { Name = "Ольха", Amount = 150 }
-            };
-            TreesDataGrid.ItemsSource = trees;
+            PlotIdLabel.Content = "Лесной участок № " + PlotId;
+            ResponsibleLabel.Content = "Ответственный: " + Responsible;
+            CompartmentLabel.Content = "Квартал: " + Compartment;
+            SubcompartmentLabel.Content = "Выдел: " + Subcompartment;
+            TreesDataGrid.ItemsSource = TreesComposition;
         }
-
-
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentFrame.GoBack();
         }
-
         private void CreateEventButton_Click(object sender, RoutedEventArgs e)
         {
-            App.CurrentFrame.Navigate(new CreateEventPage(NumberLabel.Content));
+            App.CurrentFrame.Navigate(new CreateEventPage(null));
         }
     }
 }

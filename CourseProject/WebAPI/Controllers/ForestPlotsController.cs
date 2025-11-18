@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         {
             var forestPlots = await _service.GetForestPlotsAsync();
             if (forestPlots == null) 
-                return NotFound();
+                return NotFound("Не удалось получить список участков!");
 
             return forestPlots;
         }
@@ -50,64 +50,35 @@ namespace WebAPI.Controllers
         // PUT: api/ForestPlots/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutForestPlot(int id, ForestPlot forestPlot)
+        public async Task<IActionResult> PutForestPlot(UpdateForestPlotDto forestPlotDto)
         {
-            if (id != forestPlot.PlotId)
-            {
-                return BadRequest();
-            }
+            var forestPlot = await _service.UpdateForestPlotAsync(forestPlotDto);
+            if (forestPlot)
+                return Ok("Информаия об участке успешно обнавлена!");
 
-            _context.Entry(forestPlot).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ForestPlotExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return NotFound("Такого участка не существует!");
         }
 
         // POST: api/ForestPlots
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ForestPlot>> PostForestPlot(ForestPlot forestPlot)
+        public async Task<ActionResult<ForestPlot>> PostForestPlot(CreateForestPlotDto forestPlotDto)
         {
-            _context.ForestPlots.Add(forestPlot);
-            await _context.SaveChangesAsync();
+            var createForestPlot = await _service.CreateForestPlotAsync(forestPlotDto);
+            if (createForestPlot)
+                return Created();
 
-            return CreatedAtAction("GetForestPlot", new { id = forestPlot.PlotId }, forestPlot);
+            return BadRequest("Ошибка при создании участка!");
         }
 
         // DELETE: api/ForestPlots/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteForestPlot(int id)
         {
-            var forestPlot = await _context.ForestPlots.FindAsync(id);
-            if (forestPlot == null)
-            {
-                return NotFound();
-            }
-
-            _context.ForestPlots.Remove(forestPlot);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ForestPlotExists(int id)
-        {
-            return _context.ForestPlots.Any(e => e.PlotId == id);
+            var forestPlot = await _service.DeleteForestPlotAsync(id);
+            if (forestPlot)
+                return Ok("Участок успешно удален");
+            return NotFound("Такого участка не существует!");
         }
     }
 }
