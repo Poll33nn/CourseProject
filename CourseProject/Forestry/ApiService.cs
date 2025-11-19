@@ -28,12 +28,17 @@ namespace Forestry
                     Login = login,
                     PasswordHash = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password))),
                 });
-            var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
 
-            App.UserFullName = loginResponse.UserFullName;
-            App.UserRole = loginResponse.UserRole;
+            if (response.IsSuccessStatusCode)
+            {
+                var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponseDto>();
 
-            App.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse.Token);
+                App.UserFullName = loginResponse.UserFullName;
+                App.UserRole = loginResponse.UserRole;
+
+                App.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", loginResponse.Token);
+            }
+            
             return response.StatusCode;
         }
 
@@ -45,6 +50,74 @@ namespace Forestry
             {
                 var forestPlots = await response.Content.ReadFromJsonAsync<List<ForestPlotDto>>();
                 return forestPlots;
+            }
+
+            return null;
+        }
+
+        public async Task<HttpStatusCode> CreateForestPlotAsync(CreateForestPlotDto forestPlotDto)
+        {
+            var forestPlotJson = new StringContent(
+                JsonSerializer.Serialize(forestPlotDto)
+                , Encoding.UTF8
+                , "application/json");
+
+            var response = await App.HttpClient.PostAsJsonAsync("ForestPlots", forestPlotJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.Created;
+            }
+
+            return response.StatusCode;
+        }
+        public async Task<HttpStatusCode> UpdateForestPlot(UpdateForestPlotDto forestPlotDto)
+        {
+            var forestPlotJson = new StringContent(
+                JsonSerializer.Serialize(forestPlotDto)
+                , Encoding.UTF8
+                , "application/json");
+
+            var response = await App.HttpClient.PutAsJsonAsync($"ForestPlots/{forestPlotDto.PlotId}", forestPlotJson);
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.OK;
+            }
+
+            return response.StatusCode;
+        }
+
+        public async Task<HttpStatusCode> DeleteForestPlotAsync(int PlotId)
+        {
+            var response = await App.HttpClient.DeleteAsync($"ForestPlots/{PlotId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.OK;
+            }
+
+            return response.StatusCode;
+        }
+        public async Task<List<UserDto>> GetAllResponsibleAsync()
+        {
+            var response = await App.HttpClient.GetAsync("Users");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
+                return users;
+            }
+
+            return null;
+        }
+        public async Task<List<TreeTypeDto>> GetTreeTypeNameAsync()
+        {
+            var response = await App.HttpClient.GetAsync("TreeTypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var treeTypes = await response.Content.ReadFromJsonAsync<List<TreeTypeDto>>();
+                return treeTypes;
             }
 
             return null;

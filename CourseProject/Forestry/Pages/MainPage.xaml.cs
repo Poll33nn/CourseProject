@@ -37,7 +37,6 @@ namespace Forestry.Pages
                 new ObservableCollection<ForestPlotDto>(await _apiService.GetForestPlotsAsync());
         }
 
-        // Обработчики кнопок
         private void OnInfoClick(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
