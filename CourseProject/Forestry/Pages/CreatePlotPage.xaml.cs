@@ -37,19 +37,19 @@ namespace Forestry.Pages
         }
         public async Task LoadTreeType()
         {
-            TreeTypeComboBox.ItemsSource = await _apiService.GetAllResponsibleAsync();
+            TreeTypeComboBox.ItemsSource = await _apiService.GetTreeTypeNameAsync();
         }
         private void AddTreeButton_Click(object sender, RoutedEventArgs e)
         {
-            TreesNumberListBox.Items.Add($"{ResonsibleComboBox.SelectedValue} - {TreesNumberTextBox.Text}");
-            _treesComposition.Add(new CreateTreesNumberDto { TreeTypeId = ResonsibleComboBox.SelectedIndex + 1, Amount = Convert.ToInt32(TreesNumberTextBox.Text) });
+            TreesNumberListBox.Items.Add($"{TreeTypeComboBox.SelectedValue} - {TreesNumberTextBox.Text}");
+            _treesComposition.Add(new CreateTreesNumberDto { TreeTypeId = TreeTypeComboBox.SelectedIndex, Amount = Convert.ToInt32(TreesNumberTextBox.Text) });
         }
         private async void CreatePlotButton_Click(object sender, RoutedEventArgs e)
         {
             var result = await _apiService.CreateForestPlotAsync(new CreateForestPlotDto
             {
                 PlotId = Convert.ToInt32(PlotNumberTextBox.Text),
-                UserId = ResonsibleComboBox.SelectedIndex + 1,
+                UserId = ResonsibleComboBox.SelectedIndex,
                 Compartment = Convert.ToInt32(CompartmentTextBox.Text),
                 Subcompartment = Convert.ToInt32(SubcompartmentTextBox.Text),
                 TreeComposition = _treesComposition,
@@ -69,6 +69,8 @@ namespace Forestry.Pages
                     , "Успех"
                     , MessageBoxButton.OK
                     , MessageBoxImage.Information);
+
+                App.CurrentFrame.Navigate(new MainPage());
             }
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)

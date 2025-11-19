@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceLayer.DTO_s;
 
 namespace Forestry.Pages
 {
@@ -20,18 +22,42 @@ namespace Forestry.Pages
     /// </summary>
     public partial class PlotChangePage : Page
     {
+        private readonly ApiService _apiService = new();
         public PlotChangePage(int PlotId, string Responsible, int Compartment, int Subcompartment)
         {
             InitializeComponent();
+
             PlotNumberTextBox.Text = PlotId.ToString();
-            UserComboBox.SelectedItem = Responsible;
+            ResonsibleComboBox.Text = Responsible;
             CompartmentTextBox.Text = Compartment.ToString();
             SubcompartmentTextBox.Text = Subcompartment.ToString();
+
+            LoadResponible();
+        }
+        public async Task LoadResponible()
+        {
+            ResonsibleComboBox.ItemsSource = await _apiService.GetAllResponsibleAsync();
         }
 
-        private void ChangePlotButton_Click(object sender, RoutedEventArgs e)
+        private async void ChangePlotButton_Click(object sender, RoutedEventArgs e)
         {
-            //контроллер изменения
+            var result = await _apiService.UpdateForestPlot(new UpdateForestPlotDto
+            {
+                PlotId = Convert.ToInt32(PlotNumberTextBox.Text),
+                UserId = ResonsibleComboBox.SelectedIndex + 1,
+                Compartment = Convert.ToByte(CompartmentTextBox.Text),
+                Subcompartment = Convert.ToByte(SubcompartmentTextBox.Text),
+            });
+
+            if (result == HttpStatusCode.OK)
+            {
+                MessageBox.Show("Успешно изменено!"
+                    , "Успех"
+                    , MessageBoxButton.OK
+                    , MessageBoxImage.Information);
+
+                App.CurrentFrame.Navigate(new MainPage());
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

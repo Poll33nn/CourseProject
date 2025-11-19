@@ -74,7 +74,6 @@ namespace ServiceLayer.Service
             }
             catch (DbException)
             {
-
                 throw;
             } 
         }

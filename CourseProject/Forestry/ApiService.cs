@@ -19,7 +19,6 @@ namespace Forestry
 {
     public class ApiService
     {
-
         public async Task<HttpStatusCode> Login(string login, string password)
         {
             var response = await App.HttpClient.PostAsJsonAsync("Account",
@@ -41,7 +40,6 @@ namespace Forestry
             
             return response.StatusCode;
         }
-
         public async Task<List<ForestPlotDto>> GetForestPlotsAsync()
         {
             var response = await App.HttpClient.GetAsync("ForestPlots");
@@ -54,7 +52,6 @@ namespace Forestry
 
             return null;
         }
-
         public async Task<HttpStatusCode> CreateForestPlotAsync(CreateForestPlotDto forestPlotDto)
         {
             var forestPlotJson = new StringContent(
@@ -62,7 +59,7 @@ namespace Forestry
                 , Encoding.UTF8
                 , "application/json");
 
-            var response = await App.HttpClient.PostAsJsonAsync("ForestPlots", forestPlotJson);
+            var response = await App.HttpClient.PostAsync("ForestPlots", forestPlotJson);
 
             if (response.IsSuccessStatusCode)
             {
@@ -78,10 +75,16 @@ namespace Forestry
                 , Encoding.UTF8
                 , "application/json");
 
-            var response = await App.HttpClient.PutAsJsonAsync($"ForestPlots/{forestPlotDto.PlotId}", forestPlotJson);
+            var response = await App.HttpClient.PutAsync($"ForestPlots/{forestPlotDto.PlotId}", forestPlotJson);
             if (response.IsSuccessStatusCode)
             {
                 return HttpStatusCode.OK;
+            }
+            else
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"❌ Failed: {response.StatusCode} - {response.ReasonPhrase}");
+                System.Diagnostics.Debug.WriteLine($"Response body: {content}");
             }
 
             return response.StatusCode;

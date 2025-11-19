@@ -33,8 +33,7 @@ namespace Forestry.Pages
 
         private async Task LoadForestPlots()
         {
-            ForestPlotsList.ItemsSource = 
-                new ObservableCollection<ForestPlotDto>(await _apiService.GetForestPlotsAsync());
+            ForestPlotsList.ItemsSource = await _apiService.GetForestPlotsAsync();
         }
 
         private void OnInfoClick(object sender, RoutedEventArgs e)

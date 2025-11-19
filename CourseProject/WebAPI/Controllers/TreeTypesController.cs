@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
         private readonly TreesService _service = new();
         // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TreeTypeDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<TreeTypeDto>>> GetTreeTypeName()
         {
             var treeType = await _service.GetTreeTypeNameAsync();
             if (treeType == null)

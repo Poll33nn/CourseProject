@@ -10,5 +10,6 @@ namespace ServiceLayer.DTO_s
     {
         public int TreeTypeId { get; set; }
         public string TreeType { get; set; }
+        public override string ToString() => TreeType;
     }
 }

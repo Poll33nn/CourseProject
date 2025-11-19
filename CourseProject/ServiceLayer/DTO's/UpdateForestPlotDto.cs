@@ -12,6 +12,5 @@ namespace ServiceLayer.DTO_s
         public int UserId { get; set; }
         public int Compartment { get; set; }
         public int Subcompartment { get; set; }
-        public List<CreateTreesNumberDto> TreeComposition { get; set; } = new();
     }
 }
