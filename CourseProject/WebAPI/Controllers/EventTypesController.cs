@@ -1,0 +1,26 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.DTO_s;
+using ServiceLayer.Service;
+
+namespace WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EventTypesController : ControllerBase
+    {
+
+        private readonly EventService _service = new();
+
+        // GET: api/EventTypes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EventTypeDto>>> GetEventTypeName()
+        {
+            var eventName = await _service.GetEventTypeNameAsync();
+            if (eventName == null)
+                return BadRequest("Не удалось получить список имен мероприятий!");
+
+            return eventName;
+        }
+    }
+}

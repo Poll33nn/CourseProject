@@ -22,9 +22,11 @@ namespace Forestry.Pages
     /// </summary>
     public partial class PlotInformationPage : Page
     {
+        public int currentPlotId;
         public PlotInformationPage(int PlotId, string Responsible, int Compartment, int Subcompartment, List<TreesNumberDto> TreesComposition)
         {
             InitializeComponent();
+            currentPlotId = PlotId;
             PlotIdLabel.Content = "Лесной участок № " + PlotId;
             ResponsibleLabel.Content = "Ответственный: " + Responsible;
             CompartmentLabel.Content = "Квартал: " + Compartment;
@@ -37,7 +39,7 @@ namespace Forestry.Pages
         }
         private void CreateEventButton_Click(object sender, RoutedEventArgs e)
         {
-            App.CurrentFrame.Navigate(new CreateEventPage(null));
+            App.CurrentFrame.Navigate(new CreateEventPage(currentPlotId));
         }
     }
 }

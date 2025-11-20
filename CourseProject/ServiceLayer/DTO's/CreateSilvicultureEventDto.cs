@@ -10,6 +10,7 @@ namespace ServiceLayer.DTO_s
     {
         public int PlotId { get; set; }
         public int EventTypeId { get; set; }
+        public int TreeTypeId { get; set; }
         public string? Description { get; set; }
         public DateTime Date { get; set; }
         public int? TreesNumber { get; set; }

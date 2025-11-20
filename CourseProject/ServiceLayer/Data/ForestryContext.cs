@@ -83,6 +83,11 @@ public partial class ForestryContext : DbContext
                 .HasForeignKey(d => d.PlotId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SilvicultureEvent_ForestPlot");
+
+            entity.HasOne(d => d.TreeType).WithMany(p => p.SilvicultureEvents)
+                .HasForeignKey(d => d.TreeTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SilvicultureEvent_TreeType");
         });
 
         modelBuilder.Entity<TreeType>(entity =>

@@ -23,12 +23,12 @@ namespace Forestry.Pages
     public partial class PlotChangePage : Page
     {
         private readonly ApiService _apiService = new();
-        public PlotChangePage(int PlotId, string Responsible, int Compartment, int Subcompartment)
+        public PlotChangePage(int PlotId, int UserId, int Compartment, int Subcompartment)
         {
             InitializeComponent();
 
             PlotNumberTextBox.Text = PlotId.ToString();
-            ResonsibleComboBox.Text = Responsible;
+            ResonsibleComboBox.SelectedIndex = UserId;
             CompartmentTextBox.Text = Compartment.ToString();
             SubcompartmentTextBox.Text = Subcompartment.ToString();
 

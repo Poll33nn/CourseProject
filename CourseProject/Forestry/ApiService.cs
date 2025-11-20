@@ -89,7 +89,6 @@ namespace Forestry
 
             return response.StatusCode;
         }
-
         public async Task<HttpStatusCode> DeleteForestPlotAsync(int PlotId)
         {
             var response = await App.HttpClient.DeleteAsync($"ForestPlots/{PlotId}");
@@ -124,6 +123,58 @@ namespace Forestry
             }
 
             return null;
+        }
+        public async Task<List<EventTypeDto>> GetEventTypeNameAsync()
+        {
+            var response = await App.HttpClient.GetAsync("EventTypes");
+
+            if(response.IsSuccessStatusCode)
+            {
+                var eventName = await response.Content.ReadFromJsonAsync<List<EventTypeDto>>();
+                return eventName;
+            }
+
+            return null;
+        }
+        public async Task<List<SilvicultureEventDto>> GetAllSilvicultureEventAsync()
+        {
+            var response = await App.HttpClient.GetAsync("SilvicultureEvents");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var forestryEvents = await response.Content.ReadFromJsonAsync<List<SilvicultureEventDto>>();
+                return forestryEvents;
+            }
+
+            return null;
+        }
+        public async Task<List<SilvicultureEventDto>> GetPlotSilvicultureEventAsync(int PlotId)
+        {
+            var response = await App.HttpClient.GetAsync($"SilvicultureEvents/{PlotId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var forestryEvents = await response.Content.ReadFromJsonAsync<List<SilvicultureEventDto>>();
+                return forestryEvents;
+            }
+
+            return null;
+        }
+        public async Task<HttpStatusCode> CreateSilvicultureEventAsync(CreateSilvicultureEventDto silvicultureEvent)
+        {
+            var silvicultureEventJson = new StringContent(
+                JsonSerializer.Serialize(silvicultureEvent)
+                , Encoding.UTF8
+                , "application/json");
+
+            var response = await App.HttpClient.PostAsync("SilvicultureEvents", silvicultureEventJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.Created;
+            }
+
+            return response.StatusCode;
         }
     }
 }

@@ -11,6 +11,8 @@ public partial class SilvicultureEvent
 
     public int EventTypeId { get; set; }
 
+    public int TreeTypeId { get; set; }
+
     public string Description { get; set; } = null!;
 
     public int? TreesNumber { get; set; }
@@ -20,4 +22,6 @@ public partial class SilvicultureEvent
     public virtual EventType EventType { get; set; } = null!;
 
     public virtual ForestPlot Plot { get; set; } = null!;
+
+    public virtual TreeType TreeType { get; set; } = null!;
 }

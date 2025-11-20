@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceLayer.DTO_s;
 
 namespace Forestry.Pages
 {
@@ -20,20 +22,27 @@ namespace Forestry.Pages
     /// </summary>
     public partial class CreateEventPage : Page
     {
-        public CreateEventPage(object label)
+        private readonly ApiService _apiService = new();
+        public int currentPlotId;
+        public CreateEventPage(int PlotId)
         {
             InitializeComponent();
-            //контроллер получения списка ответственных
-            //контроллер добавления мероприятия
-            PlotIdLabel.Content = label;
-            EventTypeComboBox.Items.Add("1");
-            EventTypeComboBox.Items.Add("2");
-
+            currentPlotId = PlotId;
+            LoadEventType();
+            LoadTreeType();
+            PlotIdLabel.Content = "Лесной участок № " + PlotId;
         }
-
+        public async Task LoadEventType()
+        {
+            EventTypeComboBox.ItemsSource = await _apiService.GetEventTypeNameAsync();
+        }
+        public async Task LoadTreeType()
+        {
+            TreeTypeComboBox.ItemsSource = await _apiService.GetTreeTypeNameAsync();
+        }
         private void EventTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EventTypeComboBox.SelectedValue == "1")
+            if (EventTypeComboBox.SelectedIndex != 0)
             {
                 PanelLable.Content = "Высажено:";
                 PanelLable.Margin = new Thickness(15, 0, 7, 5);
@@ -46,7 +55,34 @@ namespace Forestry.Pages
                 PlantingPanel.Visibility = Visibility.Visible;
             }
         }
+        private async void CreateEventButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await _apiService.CreateSilvicultureEventAsync(new CreateSilvicultureEventDto
+            {
+                PlotId = currentPlotId,
+                EventTypeId = EventTypeComboBox.SelectedIndex + 1,
+                TreeTypeId = TreeTypeComboBox.SelectedIndex + 1,
+                Description = DescriptionTextBox.Text,
+                Date = DateTime.Now.Date,
+                TreesNumber = Convert.ToInt32(TreesNumberTextBox.Text),
+            });
 
+            if (result == HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show("Ошибка при создании мероприятия!"
+                    , "Ошибка"
+                    , MessageBoxButton.OK
+                    , MessageBoxImage.Warning);
+            }
+
+            if (result == HttpStatusCode.Created)
+            {
+                MessageBox.Show("Мероприятие успешно создано!"
+                    , "Успех"
+                    , MessageBoxButton.OK
+                    , MessageBoxImage.Information);
+            }
+        }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentFrame.GoBack(); 

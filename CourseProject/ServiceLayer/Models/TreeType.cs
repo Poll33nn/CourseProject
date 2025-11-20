@@ -9,5 +9,7 @@ public partial class TreeType
 
     public string Name { get; set; } = null!;
 
+    public virtual ICollection<SilvicultureEvent> SilvicultureEvents { get; set; } = new List<SilvicultureEvent>();
+
     public virtual ICollection<TreesNumber> TreesNumbers { get; set; } = new List<TreesNumber>();
 }

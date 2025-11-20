@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Data;
+using ServiceLayer.DTO_s;
 using ServiceLayer.Models;
+using ServiceLayer.Service;
 
 namespace WebAPI.Controllers
 {
@@ -14,95 +16,40 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SilvicultureEventsController : ControllerBase
     {
-        private readonly ForestryContext _context;
-
-        public SilvicultureEventsController(ForestryContext context)
-        {
-            _context = context;
-        }
+        private readonly EventService _service = new();
 
         // GET: api/SilvicultureEvents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SilvicultureEvent>>> GetSilvicultureEvents()
+        public async Task<ActionResult<IEnumerable<SilvicultureEventDto>>> GetAllSilvicultureEvents()
         {
-            return await _context.SilvicultureEvents.ToListAsync();
+            var forestryEvents = await _service.GetAllSilvicultureEventAsync();
+            if (forestryEvents == null)
+                return NotFound("Не удалось получить список участков!");
+
+            return forestryEvents;
         }
 
         // GET: api/SilvicultureEvents/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SilvicultureEvent>> GetSilvicultureEvent(int id)
+        public async Task<ActionResult<IEnumerable<SilvicultureEventDto>>> GetPlotSilvicultureEvents(int PlotId)
         {
-            var silvicultureEvent = await _context.SilvicultureEvents.FindAsync(id);
+            var forestryEvents = await _service.GetPlotSilvicultureEventAsync(PlotId);
+            if (forestryEvents == null)
+                return NotFound("Не удалось получить список участков!");
 
-            if (silvicultureEvent == null)
-            {
-                return NotFound();
-            }
-
-            return silvicultureEvent;
-        }
-
-        // PUT: api/SilvicultureEvents/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSilvicultureEvent(int id, SilvicultureEvent silvicultureEvent)
-        {
-            if (id != silvicultureEvent.EventId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(silvicultureEvent).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SilvicultureEventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return forestryEvents;
         }
 
         // POST: api/SilvicultureEvents
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SilvicultureEvent>> PostSilvicultureEvent(SilvicultureEvent silvicultureEvent)
+        public async Task<ActionResult<SilvicultureEventDto>> PostSilvicultureEvent(CreateSilvicultureEventDto silvicultureEvent)
         {
-            _context.SilvicultureEvents.Add(silvicultureEvent);
-            await _context.SaveChangesAsync();
+            var createEvent = await _service.CreateSilvicultureEventAsync(silvicultureEvent);
+            if (createEvent)
+                return Created();
 
-            return CreatedAtAction("GetSilvicultureEvent", new { id = silvicultureEvent.EventId }, silvicultureEvent);
-        }
-
-        // DELETE: api/SilvicultureEvents/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSilvicultureEvent(int id)
-        {
-            var silvicultureEvent = await _context.SilvicultureEvents.FindAsync(id);
-            if (silvicultureEvent == null)
-            {
-                return NotFound();
-            }
-
-            _context.SilvicultureEvents.Remove(silvicultureEvent);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool SilvicultureEventExists(int id)
-        {
-            return _context.SilvicultureEvents.Any(e => e.EventId == id);
+            return BadRequest("Ошибка при создании участка!");
         }
     }
 }
