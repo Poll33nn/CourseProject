@@ -27,10 +27,16 @@ namespace Forestry.Pages
         public CreateEventPage(int PlotId)
         {
             InitializeComponent();
-            currentPlotId = PlotId;
             LoadEventType();
             LoadTreeType();
+            currentPlotId = PlotId;
             PlotIdLabel.Content = "Лесной участок № " + PlotId;
+
+            if (App.UserRole == "Мастер участка")
+            {
+                EventTypeComboBox.SelectedIndex = 0;
+                EventTypeComboBox.IsEnabled = false;
+            }
         }
         public async Task LoadEventType()
         {

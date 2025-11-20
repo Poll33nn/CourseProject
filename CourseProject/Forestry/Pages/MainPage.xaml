@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Forestry.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
-      Title="MainPage">
+      Title="MainPage"
+      Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,8 +18,8 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <Label Content="Поиск: " Margin="20 0 0 0"/>
-            <TextBox x:Name="SearchTextBox" Width="150"/>
-            <Button x:Name="ClearButton" Content="Очистить"/>
+            <TextBox x:Name="SearchTextBox" Width="150" TextChanged="SearchTextBox_TextChanged"/>
+            <Button x:Name="ClearButton" Content="Очистить" Click="ClearButton_Click"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -36,9 +37,9 @@
                    x:Name="UserPopUp">
                 <Border Background="#F5F5F5" BorderBrush="Black" BorderThickness="1" CornerRadius="2">
                     <StackPanel>
-                        <Button x:Name="ReportButtom" Content="Отчеты" Width="120" Visibility="Collapsed"/>
+                        <Button x:Name="ReportButton" Content="Экспорт" Width="120" Visibility="Collapsed"/>
                         <Button x:Name="UserButton" Content="Пользователи" Width="120" Visibility="Collapsed"/>
-                        <Separator Margin="0 5"/>
+                        <Separator x:Name="PopUpSeparator" Visibility="Collapsed" Margin="0 5"/>
                         <Button Content="Выйти" Width="120" Background="#F44336" Foreground="White"/>
                     </StackPanel>
                 </Border>

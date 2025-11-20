@@ -83,8 +83,6 @@ namespace Forestry
             else
             {
                 var content = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine($"❌ Failed: {response.StatusCode} - {response.ReasonPhrase}");
-                System.Diagnostics.Debug.WriteLine($"Response body: {content}");
             }
 
             return response.StatusCode;

@@ -55,7 +55,7 @@ namespace Forestry.Pages
                         , MessageBoxImage.Information);
 
                     App.CurrentFrame.Navigate(new MainPage());
-                }                 
+                }
             }
             catch (Exception ex)
             {

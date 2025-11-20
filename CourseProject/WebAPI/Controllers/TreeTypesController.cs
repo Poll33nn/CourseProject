@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.DTO_s;
 using ServiceLayer.Service;
@@ -12,6 +13,7 @@ namespace WebAPI.Controllers
         private readonly TreesService _service = new();
         // GET: api/Users
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TreeTypeDto>>> GetTreeTypeName()
         {
             var treeType = await _service.GetTreeTypeNameAsync();
