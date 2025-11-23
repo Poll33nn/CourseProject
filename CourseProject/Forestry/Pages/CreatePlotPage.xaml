@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DockPanel>
@@ -18,28 +18,28 @@
 
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
                 <Label Content="Номер участка: " Margin="15 0 0 0"/>
-                <TextBox x:Name="PlotNumberTextBox" Width="190" Margin="18 0 0 0"/>
+                <TextBox x:Name="PlotNumberTextBox" Width="240" Margin="18 0 0 0"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
                 <Label Content="Ответственный: " Margin="15 0 0 5"/>
-                <ComboBox x:Name="ResonsibleComboBox" DisplayMemberPath="FullName" Height="25" Width="190" Margin="15.5 0 0 0" Background="#98FB98" VerticalContentAlignment="Center"/>
+                <ComboBox x:Name="ResonsibleComboBox" DisplayMemberPath="FullName" Height="25" Width="240" Margin="15.5 0 0 0" Background="#98FB98" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
                 <Label Content="Квартал: " Margin="15 0 25 5"/>
-                <TextBox x:Name="CompartmentTextBox" Width="75"/>
+                <TextBox x:Name="CompartmentTextBox" Width="100"/>
 
                 <Label Content="Выдел: " Margin="5 0 14.3 5"/>
-                <TextBox x:Name="SubcompartmentTextBox" Width="75"/>
+                <TextBox x:Name="SubcompartmentTextBox" Width="100"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
                 <Label Content="Тип дерева: " Margin="15 0 0 5"/>
-                <ComboBox x:Name="TreeTypeComboBox" DisplayMemberPath="TreeType" Width="75" Height="25"/>
+                <ComboBox x:Name="TreeTypeComboBox" DisplayMemberPath="TreeType" Width="100" Height="25"/>
 
                 <Label Content="Количество: " Margin="5 0 0 0"/>
-                <TextBox x:Name="TreesNumberTextBox" Width="50"/>
+                <TextBox x:Name="TreesNumberTextBox" Width="75"/>
                 <Button x:Name="AddTreeButton" Content="+" Width="25" Click="AddTreeButton_Click"/>
             </StackPanel>
 
