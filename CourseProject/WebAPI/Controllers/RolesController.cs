@@ -8,19 +8,20 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TreeTypesController : ControllerBase
+    [Authorize]
+    public class RolesController : ControllerBase
     {
-        private readonly TreesService _service = new();
-        // GET: api/TreeTypes
+        private readonly RoleService _service = new();
+        // GET: api/Roles
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<TreeTypeDto>>> GetTreeTypeName()
+        public async Task<ActionResult<IEnumerable<RoleDto>>> GetTreeTypeName()
         {
-            var treeType = await _service.GetTreeTypeNameAsync();
-            if (treeType == null)
+            var roleName = await _service.GetRoleNameAsync();
+            if (roleName == null)
                 return NotFound("Не удалось получить список пользователей!");
 
-            return treeType;
+            return roleName;
         }
     }
 }

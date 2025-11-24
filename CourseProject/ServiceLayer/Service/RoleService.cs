@@ -7,27 +7,24 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Data;
 using ServiceLayer.DTO_s;
-using ServiceLayer.Models;
 
 namespace ServiceLayer.Service
 {
-    public class TreesService
+    public class RoleService
     {
         private readonly ForestryContext _context = new();
-
-        public async Task<List<TreeTypeDto>> GetTreeTypeNameAsync()
+        public async Task<List<RoleDto>> GetRoleNameAsync()
         {
             try
             {
-                var treeTypes = await _context.TreeTypes.ToListAsync();
+                var roleNames = await _context.Roles.ToListAsync();
 
-                if (treeTypes == null)
+                if (roleNames == null)
                     return null;
 
-                return treeTypes.Select(treeType => new TreeTypeDto
+                return roleNames.Select(roleName => new RoleDto
                 {
-                    TreeTypeId = treeType.TreeTypeId,
-                    TreeType = treeType.Name,
+                    RoleName = roleName.Name,
                 }).ToList();
             }
             catch (DbException)

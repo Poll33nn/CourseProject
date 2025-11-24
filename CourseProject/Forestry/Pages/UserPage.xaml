@@ -1,0 +1,43 @@
+﻿<Page x:Class="Forestry.Pages.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Forestry.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserPage">
+
+    <DockPanel>
+        <Label Content="Создание и удаление пользователей" FontSize="20" FontWeight="Bold" Margin="10 0 0 5" DockPanel.Dock="Top"/>
+        <StackPanel x:Name="CreateUserStackPanel" Visibility="Collapsed" Margin="15 0 0 5" HorizontalAlignment="Left" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                <Label Content="Роль пользователя: " Margin="5 0 0 0"/>
+                <ComboBox x:Name="RoleComboBox" DisplayMemberPath="RoleName" Height="25" Width="151.8"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                <Label Content="ФИО: " Margin="5 0 0 0"/>
+                <TextBox x:Name="FullNameTextBox" Width="255"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                <Label Content="Логин: " Margin="5 0 0 0"/>
+                <TextBox x:Name="LoginTextBox" Width="84"/>
+
+                <Label Content="Пароль: " Margin="5 0 0 0"/>
+                <TextBox x:Name="PasswordTextBox" Width="84"/>
+            </StackPanel>
+            <Button x:Name="CreateUserButton" Content="Создать" HorizontalAlignment="Left" Click="CreateUserButton_Click"/>
+        </StackPanel>
+        <StackPanel x:Name="DeleteUserStackPanel" Visibility="Collapsed" Margin="15 0 0 5" HorizontalAlignment="Left" DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Номер пользователя: " Margin="5 0 0 0"/>
+                <TextBox x:Name="UserIdTextBox" Width="50"/>
+            </StackPanel>
+            <Button x:Name="DeleteUserButton" Content="Удалить" HorizontalAlignment="Left" Click="DeleteUserButton_Click"/>
+        </StackPanel>
+        
+        <Button x:Name="CreateStackPanelButton" Content="Создать пользователя" Width="180" Margin="15 0 0 15" HorizontalAlignment="Left" DockPanel.Dock="Top" Click="CreateStackPanelButton_Click"/>
+        <Button x:Name="DeleteStackPanelButton" Content="Удалить пользователя" Width="180" Margin="15 0 0 0" HorizontalAlignment="Left" DockPanel.Dock="Top" Click="DeleteStackPanelButton_Click"/>
+        <Button x:Name="BackButton" Content="Назад" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="BackButton_Click"/>
+    </DockPanel>
+</Page>

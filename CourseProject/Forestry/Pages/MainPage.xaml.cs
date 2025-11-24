@@ -108,9 +108,16 @@ namespace Forestry.Pages
                         , "Успех"
                         , MessageBoxButton.OK
                         , MessageBoxImage.Information);
-                LoadForestPlots();
             }
-        }   
+        }
+        private void UserButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.CurrentFrame.Navigate(new UserPage());
+        }
+        private void ReportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void CreatePlotButton_Click(object sender, RoutedEventArgs e)
         {
             App.CurrentFrame.Navigate(new CreatePlotPage());

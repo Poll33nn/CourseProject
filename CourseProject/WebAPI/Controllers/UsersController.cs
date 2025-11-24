@@ -33,16 +33,24 @@ namespace WebAPI.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(CreateUserDto createUser)
         {
-            return null;
+            var user = await _service.CreateUserAsync(createUser);
+            if (user)
+                return Created();
+
+            return BadRequest("Ошибка при создании пользователя!");
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(int userId)
         {
-            return null;
+            var user = await _service.DeleteUserAsync(userId);
+            if (user)
+                return Ok("Пользователь успешно удален");
+
+            return NotFound("Такого пользователя не существует или он привязан к лесному участку!");
         }
     }
 }

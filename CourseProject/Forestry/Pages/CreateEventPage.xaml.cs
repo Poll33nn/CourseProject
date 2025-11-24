@@ -87,6 +87,8 @@ namespace Forestry.Pages
                     , "Успех"
                     , MessageBoxButton.OK
                     , MessageBoxImage.Information);
+
+                App.CurrentFrame.Navigate(new MainPage());
             }
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)

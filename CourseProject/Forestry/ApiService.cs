@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -173,6 +174,49 @@ namespace Forestry
             }
 
             return response.StatusCode;
+        }
+        public async Task<HttpStatusCode> CreateUserAsync(CreateUserDto createUserDto)
+        {
+            var userJson = new StringContent(
+                JsonSerializer.Serialize(createUserDto)
+                , Encoding.UTF8
+                , "application/json");
+
+            var response = await App.HttpClient.PostAsync("Users", userJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.Created;
+            }
+
+            return response.StatusCode;
+        }
+        public async Task<HttpStatusCode> DeleteUserAsync(int userId)
+        {
+            var response = await App.HttpClient.DeleteAsync($"Users/{userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return HttpStatusCode.OK;
+            }
+            var errorContent = await response.Content.ReadAsStringAsync();
+
+            // Выводим ошибку в окно отладки
+            Debug.WriteLine($"Failed to delete user ID {userId}. Status: {response.StatusCode}. Response: {errorContent}");
+
+            return response.StatusCode;
+        }
+        public async Task<List<RoleDto>> GetRoleNameAsync()
+        {
+            var response = await App.HttpClient.GetAsync("Roles");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var roleName = await response.Content.ReadFromJsonAsync<List<RoleDto>>();
+                return roleName;
+            }
+
+            return null;
         }
     }
 }
