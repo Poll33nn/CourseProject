@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 
         // GET: api/SilvicultureEvents
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SilvicultureEventDto>>> GetAllSilvicultureEvents()
+        public async Task<ActionResult<IEnumerable<ForestEventReportDto>>> GetAllSilvicultureEvents()
         {
             var forestryEvents = await _service.GetAllSilvicultureEventAsync();
             if (forestryEvents == null)
@@ -32,8 +32,8 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/SilvicultureEvents/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<SilvicultureEventDto>>> GetPlotSilvicultureEvents(int PlotId)
+        [HttpGet("{PlotId}")]
+        public async Task<ActionResult<IEnumerable<ForestEventReportDto>>> GetPlotSilvicultureEvents(int PlotId)
         {
             var forestryEvents = await _service.GetPlotSilvicultureEventAsync(PlotId);
             if (forestryEvents == null)

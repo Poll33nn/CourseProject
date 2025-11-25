@@ -116,7 +116,7 @@ namespace Forestry.Pages
         }
         private void ReportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            App.CurrentFrame.Navigate(new ReportPage());
         }
         private void CreatePlotButton_Click(object sender, RoutedEventArgs e)
         {

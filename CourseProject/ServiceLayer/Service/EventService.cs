@@ -34,7 +34,7 @@ namespace ServiceLayer.Service
                 throw;
             }
         }
-        public async Task<List<SilvicultureEventDto>> GetAllSilvicultureEventAsync()
+        public async Task<List<ForestEventReportDto>> GetAllSilvicultureEventAsync()
         {
             try
             {
@@ -46,12 +46,13 @@ namespace ServiceLayer.Service
                 if (forestryEvents == null)
                     return null;
 
-                return forestryEvents.Select(forestryEvent => new SilvicultureEventDto
+                return forestryEvents.Select(forestryEvent => new ForestEventReportDto
                 {
                     EventId = forestryEvent.EventId,
                     EventType = forestryEvent.EventType.Name,
+                    PlotId = forestryEvent.PlotId,
                     TreeType = forestryEvent.TreeType.Name,
-                    Date = Convert.ToDateTime(forestryEvent.Date),
+                    Date = forestryEvent.Date,
                     Description = forestryEvent.Description,
                     TreesNumber = forestryEvent.TreesNumber,
                 }).ToList();
@@ -61,7 +62,7 @@ namespace ServiceLayer.Service
                 throw;
             }            
         }
-        public async Task<List<SilvicultureEventDto>> GetPlotSilvicultureEventAsync(int PlotId)
+        public async Task<List<ForestEventReportDto>> GetPlotSilvicultureEventAsync(int PlotId)
         {
             try
             {
@@ -74,12 +75,13 @@ namespace ServiceLayer.Service
                 if (plotEvents == null)
                     return null;
 
-                return plotEvents.Select(plotEvent => new SilvicultureEventDto
+                return plotEvents.Select(plotEvent => new ForestEventReportDto
                 {
                     EventId = plotEvent.EventId,
                     EventType = plotEvent.EventType.Name,
+                    PlotId = PlotId,
                     TreeType = plotEvent.TreeType.Name,
-                    Date = Convert.ToDateTime(plotEvent.Date),
+                    Date = plotEvent.Date,
                     Description = plotEvent.Description,
                     TreesNumber = plotEvent.TreesNumber,
                 }).ToList();

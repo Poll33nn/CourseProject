@@ -135,25 +135,25 @@ namespace Forestry
 
             return null;
         }
-        public async Task<List<SilvicultureEventDto>> GetAllSilvicultureEventAsync()
+        public async Task<List<ForestEventReportDto>> GetAllSilvicultureEventAsync()
         {
             var response = await App.HttpClient.GetAsync("SilvicultureEvents");
 
             if (response.IsSuccessStatusCode)
             {
-                var forestryEvents = await response.Content.ReadFromJsonAsync<List<SilvicultureEventDto>>();
+                var forestryEvents = await response.Content.ReadFromJsonAsync<List<ForestEventReportDto>>();
                 return forestryEvents;
             }
 
             return null;
         }
-        public async Task<List<SilvicultureEventDto>> GetPlotSilvicultureEventAsync(int PlotId)
+        public async Task<List<ForestEventReportDto>> GetPlotSilvicultureEventAsync(int PlotId)
         {
             var response = await App.HttpClient.GetAsync($"SilvicultureEvents/{PlotId}");
 
             if (response.IsSuccessStatusCode)
             {
-                var forestryEvents = await response.Content.ReadFromJsonAsync<List<SilvicultureEventDto>>();
+                var forestryEvents = await response.Content.ReadFromJsonAsync<List<ForestEventReportDto>>();
                 return forestryEvents;
             }
 
