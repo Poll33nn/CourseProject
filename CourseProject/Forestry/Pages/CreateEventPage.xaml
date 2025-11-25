@@ -19,7 +19,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
             <Label Content="Описание: " Margin="15 0 0 5"/>
-            <TextBox x:Name="DescriptionTextBox" Width="308.5"/>
+            <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="250" Height="75" Width="308.5"/>
         </StackPanel>
 
         <StackPanel x:Name="PlantingPanel" Orientation="Horizontal" Visibility="Collapsed" Margin="5" HorizontalAlignment="Left" DockPanel.Dock="Top">
