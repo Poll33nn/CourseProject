@@ -20,6 +20,10 @@ namespace Forestry
 {
     public class ApiService
     {
+        /// <summary>
+        /// Получает список участков с их информацией о них.
+        /// </summary>
+        /// <returns>List<ForestPlotDto> информаии об участках.</returns>
         public async Task<HttpStatusCode> Login(string login, string password)
         {
             var response = await App.HttpClient.PostAsJsonAsync("Account",
@@ -41,9 +45,13 @@ namespace Forestry
             
             return response.StatusCode;
         }
+        /// <summary>
+        /// Получает список участков с их информацией о них.
+        /// </summary>
+        /// <returns>List<ForestPlotDto> информаии об участках.</returns>
         public async Task<List<ForestPlotDto>> GetForestPlotsAsync()
         {
-            var response = await App.HttpClient.GetAsync("ForestPlots");
+            var response = await App.HttpClient.GetAsync("ForestPlots");//"ForestPlots"
 
             if (response.IsSuccessStatusCode)
             {
