@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceLayer.DTO_s;
+using ServiceLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -13,8 +15,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using ServiceLayer.DTO_s;
-using ServiceLayer.Models;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 
 namespace Forestry
 {
@@ -208,9 +211,6 @@ namespace Forestry
                 return HttpStatusCode.OK;
             }
             var errorContent = await response.Content.ReadAsStringAsync();
-
-            // Выводим ошибку в окно отладки
-            Debug.WriteLine($"Failed to delete user ID {userId}. Status: {response.StatusCode}. Response: {errorContent}");
 
             return response.StatusCode;
         }

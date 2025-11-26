@@ -29,18 +29,18 @@
             </ToggleButton>
 
             <Popup IsOpen="{Binding IsChecked, ElementName=UserProfilButton}"
-                   PlacementTarget="{Binding ElementName=UserProfilButton}"
-                   Placement="Bottom"
-                   StaysOpen="False"
-                   HorizontalOffset="-82"
-                   VerticalOffset="1"
-                   x:Name="UserPopUp">
+            PlacementTarget="{Binding ElementName=UserProfilButton}"
+            Placement="Bottom"
+            StaysOpen="False"
+            HorizontalOffset="-82"
+            VerticalOffset="1"
+            x:Name="UserPopUp">
                 <Border Background="#F5F5F5" BorderBrush="Black" BorderThickness="1" CornerRadius="2">
                     <StackPanel>
                         <Button x:Name="ReportButton" Content="Экспорт" Width="120" Visibility="Collapsed" Click="ReportButton_Click"/>
                         <Button x:Name="UserButton" Content="Пользователи" Width="120" Visibility="Collapsed" Click="UserButton_Click"/>
                         <Separator x:Name="PopUpSeparator" Visibility="Collapsed" Margin="0 5"/>
-                        <Button Content="Выйти" Width="120" Background="#F44336" Foreground="White"/>
+                        <Button Content="Выйти" Width="120"/>
                     </StackPanel>
                 </Border>
             </Popup>
