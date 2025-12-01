@@ -42,14 +42,14 @@ namespace Forestry.Pages
         private void AddTreeButton_Click(object sender, RoutedEventArgs e)
         {
             TreesNumberListBox.Items.Add($"{TreeTypeComboBox.SelectedValue} - {TreesNumberTextBox.Text}");
-            _treesComposition.Add(new CreateTreesNumberDto { TreeTypeId = TreeTypeComboBox.SelectedIndex, Amount = Convert.ToInt32(TreesNumberTextBox.Text) });
+            _treesComposition.Add(new CreateTreesNumberDto { TreeTypeId = TreeTypeComboBox.SelectedIndex + 1, Amount = Convert.ToInt32(TreesNumberTextBox.Text) });
         }
         private async void CreatePlotButton_Click(object sender, RoutedEventArgs e)
         {
             var result = await _apiService.CreateForestPlotAsync(new CreateForestPlotDto
             {
                 PlotId = Convert.ToInt32(PlotNumberTextBox.Text),
-                UserId = ResonsibleComboBox.SelectedIndex,
+                UserId = ResonsibleComboBox.SelectedIndex + 2,
                 Compartment = Convert.ToInt32(CompartmentTextBox.Text),
                 Subcompartment = Convert.ToInt32(SubcompartmentTextBox.Text),
                 TreeComposition = _treesComposition,
