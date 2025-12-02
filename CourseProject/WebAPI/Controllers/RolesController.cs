@@ -11,7 +11,11 @@ namespace WebAPI.Controllers
     [Authorize]
     public class RolesController : ControllerBase
     {
-        private readonly RoleService _service = new();
+        private readonly RoleService _service;
+        public RolesController(RoleService service)
+        {
+            _service = service;
+        }
         // GET: api/Roles
         [HttpGet]
         [Authorize]

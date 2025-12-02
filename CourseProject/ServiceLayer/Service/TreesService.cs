@@ -13,7 +13,11 @@ namespace ServiceLayer.Service
 {
     public class TreesService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public TreesService(ForestryContext context)
+        {
+            _context = context;
+        }
 
         public async Task<List<TreeTypeDto>> GetTreeTypeNameAsync()
         {

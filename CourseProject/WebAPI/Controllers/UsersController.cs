@@ -18,7 +18,11 @@ namespace WebAPI.Controllers
     [Authorize]
     public class UsersController : ControllerBase
     {
-        private readonly UserService _service = new();
+        private readonly UserService _service;
+        public UsersController(UserService service)
+        {
+            _service = service;
+        }
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()

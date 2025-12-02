@@ -10,7 +10,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TreeTypesController : ControllerBase
     {
-        private readonly TreesService _service = new();
+        private readonly TreesService _service;
+        public TreeTypesController(TreesService service)
+        {
+            _service = service;
+        }
         // GET: api/TreeTypes
         [HttpGet]
         [Authorize]

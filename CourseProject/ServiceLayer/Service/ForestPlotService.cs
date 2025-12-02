@@ -14,7 +14,11 @@ namespace ServiceLayer.Service
 {
     public class ForestPlotService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public ForestPlotService(ForestryContext context)
+        {
+            _context = context;
+        }
 
         public async Task<List<ForestPlotDto>> GetForestPlotsAsync()
         {

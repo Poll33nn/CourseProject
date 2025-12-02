@@ -13,7 +13,11 @@ namespace ServiceLayer.Service
 {
     public class AccountService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public AccountService(ForestryContext context)
+        {
+            _context = context;
+        }
 
         public async Task<UserDto> LoginUser(LoginDto loginDto)
         {

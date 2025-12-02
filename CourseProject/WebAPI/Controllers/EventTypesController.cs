@@ -12,7 +12,11 @@ namespace WebAPI.Controllers
     public class EventTypesController : ControllerBase
     {
 
-        private readonly EventService _service = new();
+        private readonly EventService _service;
+        public EventTypesController(EventService service)
+        {
+            _service = service;
+        }
 
         // GET: api/EventTypes
         [HttpGet]

@@ -12,7 +12,11 @@ namespace ServiceLayer.Service
 {
     public class RoleService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public RoleService(ForestryContext context)
+        {
+            _context = context;
+        }
         public async Task<List<RoleDto>> GetRoleNameAsync()
         {
             try

@@ -13,7 +13,11 @@ namespace ServiceLayer.Service
 {
     public class EventService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public EventService(ForestryContext context)
+        {
+            _context = context;
+        }
         public async Task<List<EventTypeDto>> GetEventTypeNameAsync()
         {
             try

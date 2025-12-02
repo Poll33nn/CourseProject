@@ -18,7 +18,11 @@ namespace WebAPI.Controllers
     [Authorize]
     public class SilvicultureEventsController : ControllerBase
     {
-        private readonly EventService _service = new();
+        private readonly EventService _service;
+        public SilvicultureEventsController(EventService service)
+        {
+            _service = service;
+        }
 
         // GET: api/SilvicultureEvents
         [HttpGet]

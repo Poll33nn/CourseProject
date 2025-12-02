@@ -14,7 +14,11 @@ namespace ServiceLayer.Service
 {
     public class UserService
     {
-        private readonly ForestryContext _context = new();
+        private readonly ForestryContext _context;
+        public UserService(ForestryContext context)
+        {
+            _context = context;
+        }
 
         public async Task<List<UserDto>> GetAllResposibleAsync()
         {
