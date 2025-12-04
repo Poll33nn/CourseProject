@@ -16,6 +16,8 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ForestPlotService>();
 builder.Services.AddScoped<EventService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<TreesService>();
 builder.Services.AddScoped<TokenService, TokenService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -46,5 +48,5 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.Urls.Add("http://localhost:5163");
 app.Run();

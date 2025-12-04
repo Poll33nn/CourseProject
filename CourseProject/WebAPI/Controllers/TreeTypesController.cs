@@ -8,6 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TreeTypesController : ControllerBase
     {
         private readonly TreesService _service;
