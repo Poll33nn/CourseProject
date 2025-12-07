@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Forestry.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1200"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="MainPage"
       Loaded="Page_Loaded">
 
@@ -40,14 +40,14 @@
                         <Button x:Name="ReportButton" Content="Экспорт" Width="120" Visibility="Collapsed" Click="ReportButton_Click"/>
                         <Button x:Name="UserButton" Content="Пользователи" Width="120" Visibility="Collapsed" Click="UserButton_Click"/>
                         <Separator x:Name="PopUpSeparator" Visibility="Collapsed" Margin="0 5"/>
-                        <Button Content="Выйти" Width="120"/>
+                        <Button x:Name="LogoutButton" Content="Выйти" Width="120" Click="LogoutButton_Click"/>
                     </StackPanel>
                 </Border>
             </Popup>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Row="1">
-            <ScrollViewer  MaxHeight="535">
+            <ScrollViewer  MaxHeight="400">
                 <ItemsControl x:Name="ForestPlotsList">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Forestry"
         mc:Ignorable="d"
-        Title="Лесничество" Height="800" Width="1200">
+        Title="Лесничество" Height="650" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>

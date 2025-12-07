@@ -32,6 +32,9 @@ namespace Forestry.Pages
             CompartmentLabel.Content = "Квартал: " + Compartment;
             SubcompartmentLabel.Content = "Выдел: " + Subcompartment;
             TreesDataGrid.ItemsSource = TreesComposition;
+            
+            if(App.UserRole == "Участковый лесничий")
+                CreateEventButton.Visibility = Visibility.Collapsed;
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {

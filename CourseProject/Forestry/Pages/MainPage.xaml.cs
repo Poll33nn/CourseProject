@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,6 +47,10 @@ namespace Forestry.Pages
                 case "Инженер 2 категории":
                     ReportButton.Visibility = Visibility.Visible;
                     PopUpSeparator.Visibility = Visibility.Visible;
+                    break;
+
+                case "Участковый лесничий":
+                    CreatePlotButton.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -109,6 +114,14 @@ namespace Forestry.Pages
                         , MessageBoxButton.OK
                         , MessageBoxImage.Information);
             }
+        }
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            App.UserFullName = null;
+            App.UserRole = null;
+            App.HttpClient.DefaultRequestHeaders.Authorization = null;
+            App.CurrentFrame.Navigate(new AuthPage());
         }
         private void UserButton_Click(object sender, RoutedEventArgs e)
         {
