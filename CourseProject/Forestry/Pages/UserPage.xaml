@@ -16,8 +16,8 @@
                 <ComboBox x:Name="RoleComboBox" DisplayMemberPath="RoleName" Height="25" Width="151.8"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-                <Label Content="ФИО: " Margin="5 0 0 0"/>
-                <TextBox x:Name="FullNameTextBox" Width="255"/>
+                <Label Content="ФИО: " Margin="5 0 9.5 0"/>
+                <TextBox x:Name="FullNameTextBox" Width="245"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                 <Label Content="Логин: " Margin="5 0 0 0"/>

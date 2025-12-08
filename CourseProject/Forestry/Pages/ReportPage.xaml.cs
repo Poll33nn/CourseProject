@@ -37,6 +37,7 @@ namespace Forestry.Pages
         }
         private async void ReportAllForestryEvents_Checked(object sender, RoutedEventArgs e)
         {
+            PlotIdStackPanel.Visibility = Visibility.Collapsed;
             _eventList = await _apiServic.GetAllSilvicultureEventAsync();
         }
         private async void ReportForestPlotEvents_Checked(object sender, RoutedEventArgs e)
