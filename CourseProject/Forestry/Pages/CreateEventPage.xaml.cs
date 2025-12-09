@@ -63,6 +63,50 @@ namespace Forestry.Pages
         }
         private async void CreateEventButton_Click(object sender, RoutedEventArgs e)
         {
+            if (EventTypeComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Пожалуйста, выберите тип мероприятия."
+                    , "Ошибка ввода"
+                        , MessageBoxButton.OK
+                        , MessageBoxImage.Warning);
+                return;
+            }
+
+            bool? plantingOrFelling = null;
+            var selectedEvent = EventTypeComboBox.SelectedItem as EventTypeDto;
+            if (selectedEvent != null)
+            {
+                plantingOrFelling = selectedEvent.Name == "Вырубка леса" || selectedEvent.Name == "Лесовосстановление" || selectedEvent.Name == "Воспроизводство лесов";
+            }
+
+            if (PlantingPanel.Visibility == Visibility.Visible)
+            {
+                if (TreeTypeComboBox.SelectedItem == null)
+                {
+                    MessageBox.Show("Пожалуйста, выберите породу дерева."
+                        , "Ошибка ввода"
+                        , MessageBoxButton.OK
+                        , MessageBoxImage.Warning);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(TreesNumberTextBox.Text))
+                {
+                    MessageBox.Show("Поле 'Количество' не может быть пустым."
+                        , "Ошибка ввода"
+                        , MessageBoxButton.OK
+                        , MessageBoxImage.Warning);
+                    return;
+                }
+                if (!int.TryParse(TreesNumberTextBox.Text, out int count) || count <= 0)
+                {
+                    MessageBox.Show("Количество должно быть целым положительным числом."
+                        , "Ошибка ввода"
+                        , MessageBoxButton.OK
+                        , MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             var result = await _apiService.CreateSilvicultureEventAsync(new CreateSilvicultureEventDto
             {
                 PlotId = currentPlotId,

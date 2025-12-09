@@ -41,6 +41,27 @@ namespace Forestry.Pages
 
         private async void ChangePlotButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(PlotNumberTextBox.Text))
+            {
+                MessageBox.Show("Укажите номер участка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (ResonsibleComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите ответственного сотрудника.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!int.TryParse(CompartmentTextBox.Text, out int compartment) || compartment <= 0 || compartment >= 256)
+            {
+                MessageBox.Show("Квартал должен быть целым числом от 1 до 255.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (!int.TryParse(SubcompartmentTextBox.Text, out int subcompartment) || subcompartment <= 0 || compartment >= 256)
+            {
+                MessageBox.Show("Выдел должен быть целым числом от 1 до 255.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             var result = await _apiService.UpdateForestPlot(new UpdateForestPlotDto
             {
                 PlotId = Convert.ToInt32(PlotNumberTextBox.Text),
