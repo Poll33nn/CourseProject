@@ -113,6 +113,7 @@ namespace Forestry.Pages
                         , "Успех"
                         , MessageBoxButton.OK
                         , MessageBoxImage.Information);
+                LoadForestPlots();
             }
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
