@@ -56,7 +56,7 @@ namespace Forestry.Pages
                 MessageBox.Show("Квартал должен быть целым числом от 1 до 255.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (!int.TryParse(SubcompartmentTextBox.Text, out int subcompartment) || subcompartment <= 0 || compartment >= 256)
+            if (!int.TryParse(SubcompartmentTextBox.Text, out int subcompartment) || subcompartment <= 0 || subcompartment >= 256)
             {
                 MessageBox.Show("Выдел должен быть целым числом от 1 до 255.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

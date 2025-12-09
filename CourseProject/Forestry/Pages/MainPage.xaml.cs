@@ -118,7 +118,6 @@ namespace Forestry.Pages
         }
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-
             App.UserFullName = null;
             App.UserRole = null;
             App.HttpClient.DefaultRequestHeaders.Authorization = null;

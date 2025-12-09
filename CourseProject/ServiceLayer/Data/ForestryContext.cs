@@ -66,7 +66,7 @@ public partial class ForestryContext : DbContext
         {
             entity.HasKey(e => e.EventId);
 
-            entity.ToTable("SilvicultureEvent");
+            entity.ToTable("SilvicultureEvent", tb => tb.HasTrigger("SilvicultureEvent_Trigger"));
 
             entity.Property(e => e.Description).HasMaxLength(250);
 
