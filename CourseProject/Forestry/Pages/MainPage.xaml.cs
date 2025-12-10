@@ -107,6 +107,16 @@ namespace Forestry.Pages
             var plot = button?.Tag as ForestPlotDto;
             if (plot == null) return;
             {
+                var confirmation = MessageBox.Show(
+                    $"Вы действительно хотите удалить участок № {plot.PlotId}?",
+                    "Подтверждение удаления",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question
+                );
+
+                if (confirmation != MessageBoxResult.Yes) 
+                    return;
+
                 var result = await _apiService.DeleteForestPlotAsync(plot.PlotId);
                 if (result == System.Net.HttpStatusCode.OK)
                     MessageBox.Show("Участок удален!"
