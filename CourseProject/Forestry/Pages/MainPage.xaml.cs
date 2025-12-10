@@ -99,7 +99,7 @@ namespace Forestry.Pages
             var button = sender as Button;
             var plot = button?.Tag as ForestPlotDto;
             if (plot != null)
-                App.CurrentFrame.Navigate(new PlotChangePage(plot.PlotId, plot.UserId, plot.Compartment, plot.Subcompartment));
+               App.CurrentFrame.Navigate(new PlotChangePage(plot.PlotId, plot.UserId, plot.Compartment, plot.Subcompartment));
         }
         private async void OnDeleteClick(object sender, RoutedEventArgs e)
         {

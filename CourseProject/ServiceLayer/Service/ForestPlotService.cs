@@ -36,6 +36,7 @@ namespace ServiceLayer.Service
                 return forestPlots.Select(forestPlot => new ForestPlotDto
                 {
                     PlotId = forestPlot.PlotId,
+                    UserId = forestPlot.UserId,
                     Responsible = $"{forestPlot.User.LastName} {forestPlot.User.Name} {forestPlot.User.Patronymic}".Trim(),
                     Compartment = forestPlot.Compartment,
                     Subcompartment = forestPlot.Subcompartment,

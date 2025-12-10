@@ -26,9 +26,8 @@ namespace Forestry.Pages
         public PlotChangePage(int PlotId, int UserId, int Compartment, int Subcompartment)
         {
             InitializeComponent();
-
             PlotNumberTextBox.Text = PlotId.ToString();
-            ResonsibleComboBox.SelectedIndex = UserId;
+            ResonsibleComboBox.SelectedIndex = UserId - 2;
             CompartmentTextBox.Text = Compartment.ToString();
             SubcompartmentTextBox.Text = Subcompartment.ToString();
 
@@ -65,7 +64,7 @@ namespace Forestry.Pages
             var result = await _apiService.UpdateForestPlot(new UpdateForestPlotDto
             {
                 PlotId = Convert.ToInt32(PlotNumberTextBox.Text),
-                UserId = ResonsibleComboBox.SelectedIndex + 1,
+                UserId = ResonsibleComboBox.SelectedIndex + 2,
                 Compartment = Convert.ToByte(CompartmentTextBox.Text),
                 Subcompartment = Convert.ToByte(SubcompartmentTextBox.Text),
             });
